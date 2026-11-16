@@ -2,11 +2,11 @@
 
 # AgentQuotaBench
 
-**Evaluating Multi-Agent LLM Workflows Under Shared Inference Quotas**
+<strong>Evaluating Multi-Agent LLM Workflows Under Shared Inference Quotas</strong>
 
 A reproducible benchmark protocol for capacity-aware admission control, deadline-adjusted goodput, and tenant fairness.
 
-**Research Protocol | Version 1.1 | November 2026**
+<strong>Research Protocol | Version 1.1 | November 2026</strong>
 
 [![Research](https://img.shields.io/badge/Research-AI%20Systems-6C5CE7?style=flat-square)](https://github.com/Attayab-31)
 [![Protocol](https://img.shields.io/badge/Category-Research%20Protocol-3776AB?style=flat-square)](https://github.com/Attayab-31)
@@ -40,11 +40,11 @@ AgentQuotaBench investigates whether this increased inference demand can reduce 
 
 The proposed benchmark compares four workflow architectures under a common account-level capacity pool and evaluates quota-aware admission control as an intervention.
 
-**Repository:** [Attayab-31/Attayab-31.github.io](https://github.com/Attayab-31/Attayab-31.github.io)
+<strong>Repository:</strong> [Attayab-31/Attayab-31.github.io](https://github.com/Attayab-31/Attayab-31.github.io)
 
-**Publication archive:** [Zenodo](https://zenodo.org) • DOI: [10.5281/zenodo.24279037](https://doi.org/10.5281/zenodo.24279037)
+<strong>Publication archive:</strong> [Zenodo](https://zenodo.org) • DOI: [10.5281/zenodo.24279037](https://doi.org/10.5281/zenodo.24279037)
 
-**Portfolio:** [attayab-31.github.io](https://attayab-31.github.io/)
+<strong>Portfolio:</strong> [attayab-31.github.io](https://attayab-31.github.io/)
 
 ## Abstract
 
@@ -83,11 +83,11 @@ The most important contrast is M3 versus M2, which isolates the effect of quota-
 
 ### Workload Families
 
-**AppWorld — API and Tool-Use Tasks**
+<strong>AppWorld — API and Tool-Use Tasks</strong>
 
 AppWorld provides simulated applications, structured APIs, and multi-step tool-use tasks. The protocol proposes selecting at least 60 unique tasks, stratified by dependency depth, branch count, and tool complexity.
 
-**Terminal-Bench — Terminal and Software Tasks**
+<strong>Terminal-Bench — Terminal and Software Tasks</strong>
 
 Terminal-Bench provides executable terminal and software engineering tasks with outcome verification. The protocol requires a frozen release, task identifiers, environment image digests, and grader versions before confirmatory execution.
 
@@ -285,7 +285,7 @@ These tests validate selected reference-model mechanics only. They do not establ
 | Empirical results | Not available |
 | Public benchmark code and run artifacts | Pending |
 
-**Publication integrity:** This repository describes a research protocol, not a completed empirical benchmark. No benchmark task-success rates, goodput measurements, latency quantiles, p-values, confidence intervals, or cost-per-success findings are reported.
+<strong>Publication integrity:</strong> This repository describes a research protocol, not a completed empirical benchmark. No benchmark task-success rates, goodput measurements, latency quantiles, p-values, confidence intervals, or cost-per-success findings are reported.
 
 The full benchmark harness and confirmatory results must be made available separately as they are implemented and validated.
 
@@ -293,10 +293,11 @@ The full benchmark harness and confirmatory results must be made available separ
 
 Please cite the protocol as follows:
 
-Ashraf, M. A. (2026). *AgentQuotaBench: Evaluating Multi-Agent LLM Workflows Under Shared Inference Quotas*. Research Protocol, Version 1.1. Zenodo.
+Ashraf, M. A. (2026). <em>AgentQuotaBench: Evaluating Multi-Agent LLM Workflows Under Shared Inference Quotas</em>. Research Protocol, Version 1.1. Zenodo.
 
 ### BibTeX
 
+{% raw %}
 ~~~bibtex
 @misc{ashraf2026agentquotabench,
   author       = {Ashraf, Muhammad Attayab},
@@ -309,15 +310,16 @@ Ashraf, M. A. (2026). *AgentQuotaBench: Evaluating Multi-Agent LLM Workflows Und
   note         = {Research Protocol, Version 1.1. Published November 16, 2026. Confirmatory experiments pending.}
 }
 ~~~
+{% endraw %}
 
-**DOI:** [10.5281/zenodo.24279037](https://doi.org/10.5281/zenodo.24279037)  
-**Zenodo record:** [https://zenodo.org](https://zenodo.org)
+<strong>DOI:</strong> [10.5281/zenodo.24279037](https://doi.org/10.5281/zenodo.24279037)  
+<strong>Zenodo record:</strong> [https://zenodo.org](https://zenodo.org)
 
 ## Author
 
 <div align="center">
 
-**Muhammad Attayab Ashraf**
+<strong>Muhammad Attayab Ashraf</strong>
 
 Independent Researcher | Founder & CEO, Automivex
 
@@ -334,12 +336,12 @@ Lahore, Pakistan
 
 For academic inquiries, research discussions, collaboration opportunities, or questions regarding AgentQuotaBench, contact:
 
-- **Author:** Muhammad Attayab Ashraf
-- **Email:** [attayabpc2@gmail.com](mailto:attayabpc2@gmail.com)
-- **GitHub:** [github.com/Attayab-31](https://github.com/Attayab-31)
-- **Portfolio:** [attayab.automivex.com](https://attayab.automivex.com)
-- **LinkedIn:** [Muhammad Attayab Ashraf](https://www.linkedin.com/in/muhammad-attayab-ashraf-519562262/)
+- <strong>Author:</strong> Muhammad Attayab Ashraf
+- <strong>Email:</strong> [attayabpc2@gmail.com](mailto:attayabpc2@gmail.com)
+- <strong>GitHub:</strong> [github.com/Attayab-31](https://github.com/Attayab-31)
+- <strong>Portfolio:</strong> [attayab.automivex.com](https://attayab.automivex.com)
+- <strong>LinkedIn:</strong> [Muhammad Attayab Ashraf](https://www.linkedin.com/in/muhammad-attayab-ashraf-519562262/)
 
 ---
 
-*AgentQuotaBench aims to contribute to the evaluation of reliable, capacity-aware, and resource-efficient multi-agent LLM systems through controlled experiments and reproducible benchmark methodology.*
+<em>AgentQuotaBench aims to contribute to the evaluation of reliable, capacity-aware, and resource-efficient multi-agent LLM systems through controlled experiments and reproducible benchmark methodology.</em>

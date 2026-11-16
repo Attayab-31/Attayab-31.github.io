@@ -8,7 +8,7 @@ lang: en
 
 # Muhammad Attayab Ashraf
 
-**Independent Researcher | AI Systems | Multi-Agent LLMs | Agentic AI**
+<strong>Independent Researcher | AI Systems | Multi-Agent LLMs | Agentic AI</strong>
 
 Research on reliable, capacity-aware, and reproducible AI systems, with a focus on how multi-agent workflows behave under shared inference constraints.
 
@@ -24,7 +24,7 @@ Research on reliable, capacity-aware, and reproducible AI systems, with a focus 
 
 ## About
 
-I am an independent researcher and the Founder & CEO of **Automivex**, based in Lahore, Pakistan. My research interests center on AI systems engineering, multi-agent LLM workflows, inference-serving infrastructures, resource allocation, and reproducible benchmark design.
+I am an independent researcher and the Founder & CEO of <strong>Automivex</strong>, based in Lahore, Pakistan. My research interests center on AI systems engineering, multi-agent LLM workflows, inference-serving infrastructures, resource allocation, and reproducible benchmark design.
 
 My work explores the systems questions that emerge when capable AI agents move from isolated experiments into concurrent, resource-constrained applications. I am particularly interested in evaluating how multi-agent workflows perform under shared inference quotas, admission control, queueing pressure, and fairness constraints.
 
@@ -44,9 +44,9 @@ My work explores the systems questions that emerge when capable AI agents move f
 
 ### AgentQuotaBench
 
-**Evaluating Multi-Agent LLM Workflows Under Shared Inference Quotas**
+<strong>Evaluating Multi-Agent LLM Workflows Under Shared Inference Quotas</strong>
 
-*A reproducible benchmark protocol for capacity-aware admission control, deadline-adjusted goodput, and tenant fairness.*
+<em>A reproducible benchmark protocol for capacity-aware admission control, deadline-adjusted goodput, and tenant fairness.</em>
 
 [![Protocol](https://img.shields.io/badge/Category-Research%20Protocol-3776AB?style=flat-square)](#protocol-status)
 [![Version](https://img.shields.io/badge/Version-1.1-0A66C2?style=flat-square)](#publication-details)
@@ -92,9 +92,9 @@ The quota multipliers are emulator settings normalized to measured single-agent 
 
 ### Primary endpoint and evaluation metrics
 
-The single primary endpoint is **deadline-adjusted goodput**: grader-passing workflows completed before their frozen deadlines per minute of a fixed open-loop measurement window. Workflows submitted after the deadline or failing validation do not count as successful goodput.
+The single primary endpoint is <strong>deadline-adjusted goodput</strong>: grader-passing workflows completed before their frozen deadlines per minute of a fixed open-loop measurement window. Workflows submitted after the deadline or failing validation do not count as successful goodput.
 
-Prespecified guardrails are **task success** and **p95 end-to-end latency**. Secondary measures include queue delay, rate-limit responses, retry amplification, token use, cost per successful task, coordination overhead, and tenant fairness outcomes.
+Prespecified guardrails are <strong>task success</strong> and <strong>p95 end-to-end latency</strong>. Secondary measures include queue delay, rate-limit responses, retry amplification, token use, cost per successful task, coordination overhead, and tenant fairness outcomes.
 
 For the separate mixed-tenant fairness track, the protocol specifies Jain's fairness index alongside absolute goodput, per-tenant service rates, worst-tenant outcomes, and starvation events.
 
@@ -104,7 +104,7 @@ For the separate mixed-tenant fairness track, the protocol specifies Jain's fair
 
 # 34,560
 
-**Core confirmatory workflow episodes**
+<strong>Core confirmatory workflow episodes</strong>
 
 60 tasks × 2 workload families × 4 architectures × 4 concurrency levels × 2 arrival profiles × 3 quota profiles × 3 independent seeds
 
@@ -114,17 +114,17 @@ The mixed-tenant fairness track is additional and is counted separately from the
 
 ## Research Principles
 
-**Controlled comparison.** The four architectures are evaluated with matched task instructions, a pinned model/provider configuration, equivalent tools and state snapshots, explicit workflow budgets, and a shared quota ledger.
+<strong>Controlled comparison.</strong> The four architectures are evaluated with matched task instructions, a pinned model/provider configuration, equivalent tools and state snapshots, explicit workflow budgets, and a shared quota ledger.
 
-**Service-level evaluation.** The protocol evaluates complete logical workflows rather than relying only on isolated request counts, token totals, or average latency. Goodput, deadline attainment, and fairness are treated as first-class outcome measures.
+<strong>Service-level evaluation.</strong> The protocol evaluates complete logical workflows rather than relying only on isolated request counts, token totals, or average latency. Goodput, deadline attainment, and fairness are treated as first-class outcome measures.
 
-**Transparent intervention.** M3 changes worker admission rather than the underlying model or communication representation. It reserves estimated shared capacity before dispatch and records reservation, fallback, and overrun decisions.
+<strong>Transparent intervention.</strong> M3 changes worker admission rather than the underlying model or communication representation. It reserves estimated shared capacity before dispatch and records reservation, fallback, and overrun decisions.
 
-**Reproducibility.** The proposed release package includes versioned task manifests, model and quota configurations, arrival and fault schedules, prompts, event schemas, run seeds, sanitized traces, and analysis scripts.
+<strong>Reproducibility.</strong> The proposed release package includes versioned task manifests, model and quota configurations, arrival and fault schedules, prompts, event schemas, run seeds, sanitized traces, and analysis scripts.
 
 ## Protocol Status
 
-This work is a **research protocol and benchmark design**, not a completed empirical evaluation. The manuscript specifies the research questions, confirmatory conditions, workload plan, quota model, and statistical analysis plan, but the full benchmark harness and data collection remain pending.
+This work is a <strong>research protocol and benchmark design</strong>, not a completed empirical evaluation. The manuscript specifies the research questions, confirmatory conditions, workload plan, quota model, and statistical analysis plan, but the full benchmark harness and data collection remain pending.
 
 | Component | Status in protocol v1.1 |
 | --- | --- |
@@ -167,10 +167,11 @@ No task-success rates, latency quantiles, goodput values, provider rate-limit ra
 
 Suggested citation:
 
-Ashraf, M. A. (2026). *AgentQuotaBench: Evaluating Multi-Agent LLM Workflows Under Shared Inference Quotas*. Research Protocol, Version 1.1. Zenodo.
+Ashraf, M. A. (2026). <em>AgentQuotaBench: Evaluating Multi-Agent LLM Workflows Under Shared Inference Quotas</em>. Research Protocol, Version 1.1. Zenodo.
 
 ### BibTeX
 
+{% raw %}
 ```bibtex
 @misc{ashraf2026agentquotabench,
   author       = {Ashraf, Muhammad Attayab},
@@ -183,6 +184,7 @@ Ashraf, M. A. (2026). *AgentQuotaBench: Evaluating Multi-Agent LLM Workflows Und
   note         = {Research Protocol, Version 1.1. Published November 16, 2026. Confirmatory experiments pending.}
 }
 ```
+{% endraw %}
 
 DOI: [10.5281/zenodo.24279037](https://doi.org/10.5281/zenodo.24279037)  
 Zenodo record: [https://zenodo.org](https://zenodo.org)
@@ -191,7 +193,7 @@ Zenodo record: [https://zenodo.org](https://zenodo.org)
 
 <div align="center">
 
-**Muhammad Attayab Ashraf**  
+<strong>Muhammad Attayab Ashraf</strong>  
 Independent Researcher | Founder & CEO, Automivex  
 Lahore, Pakistan
 
@@ -208,6 +210,6 @@ For academic inquiries, research discussion, or potential collaboration, please 
 
 <div align="center">
 
-*Building and evaluating reliable AI systems through rigorous methodology, transparent reporting, and reproducible research.*
+<em>Building and evaluating reliable AI systems through rigorous methodology, transparent reporting, and reproducible research.</em>
 
 </div>
