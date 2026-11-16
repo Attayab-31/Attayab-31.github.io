@@ -24,9 +24,9 @@ Research on reliable, capacity-aware, and reproducible AI systems, with a focus 
 
 ## About
 
-I am an independent researcher and the Founder & CEO of **Automivex**, based in Lahore, Pakistan. My research interests center on AI systems engineering, multi-agent LLM workflows, inference-serving infrastructure, resource allocation, and reproducible evaluation.
+I am an independent researcher and the Founder & CEO of **Automivex**, based in Lahore, Pakistan. My research interests center on AI systems engineering, multi-agent LLM workflows, inference-serving infrastructures, resource allocation, and reproducible benchmark design.
 
-My work explores the systems questions that emerge when capable AI agents move from isolated experiments into concurrent, resource-constrained applications. I am particularly interested in evaluating not only whether an agent completes a task, but also how reliably and efficiently a system serves many workflows under shared capacity constraints.
+My work explores the systems questions that emerge when capable AI agents move from isolated experiments into concurrent, resource-constrained applications. I am particularly interested in evaluating how multi-agent workflows perform under shared inference quotas, admission control, queueing pressure, and fairness constraints.
 
 ## Research Interests
 
@@ -56,17 +56,17 @@ My work explores the systems questions that emerge when capable AI agents move f
 
 ### Research overview
 
-AgentQuotaBench investigates how multi-agent large language model (LLM) workflows behave when concurrent user workflows compete for one shared inference-capacity pool. Multi-agent architectures can parallelize planning, execution, research, and verification, but their fan-out also increases demand for request-per-minute (RPM) capacity, token-per-minute (TPM) capacity, in-flight request slots, and retry budgets.
+AgentQuotaBench investigates how multi-agent large language model (LLM) workflows behave when concurrent user workflows compete for a shared inference-capacity pool. Multi-agent architectures can improve task completion by parallelizing research, planning, execution, and verification, but the same fan-out concentrates demand on shared inference resources.
 
-The protocol proposes a controlled comparison of four workflow architectures under matched task and resource-accounting rules. It evaluates whether additional agent parallelism can improve isolated-task quality while reducing system-level service outcomes under saturation, and whether quota-aware admission control can mitigate that trade-off.
+The protocol proposes a controlled comparison of four workflow architectures under matched task and resource-accounting rules. It evaluates whether additional agent parallelism can improve isolated-task outcomes without reducing service-level goodput, deadline attainment, or tenant fairness under a fixed quota model.
 
 ### Abstract
 
-Multi-agent large language model (LLM) workflows can improve task completion by parallelizing research, planning, execution, and verification. The same fan-out concentrates demand on shared inference capacity: workers and concurrent user workflows compete for request-per-minute (RPM) limits, token-per-minute (TPM) limits, in-flight request slots, and retry budgets. Isolated-task evaluations do not fully characterize this deployment setting. This protocol introduces AgentQuotaBench, a reproducible benchmark for comparing workflow architectures under a common account-level capacity pool. Four confirmatory conditions are specified: a single agent (S1), independent best-of-three sampling (S2), an unconstrained planner-executor-verifier team (M2), and the same team with quota-aware admission control (M3). Two workload families are planned: simulated API/tool-use tasks from AppWorld and outcome-verifiable terminal/software tasks from a frozen Terminal-Bench release, subject to task-level license and reproducibility checks. Workloads will be replayed under steady and burst arrivals, three normalized quota profiles, and concurrency levels of 1, 4, 8, and 16 logical workflows. The core confirmatory design contains 34,560 workflow episodes before the separate mixed-tenant fairness track. The primary endpoint is deadline-adjusted goodput: successful on-time workflows per minute over a fixed open-loop measurement window. Task success and p95 latency are prespecified guardrails. Secondary measures include queue delay, rate-limit responses, retry amplification, token use, cost per successful task, coordination overhead, budget violations, admission diagnostics, and tenant fairness. M3 reserves estimated shared capacity before dispatch and falls back to sequential or single-agent execution when capacity is constrained. The hypotheses are falsifiable: fan-out may raise isolated-task quality while lowering service-level goodput under saturation; admission control may mitigate, but is not assumed to eliminate, this effect. No empirical benchmark findings are reported.
+Multi-agent large language model (LLM) workflows can improve task completion by parallelizing research, planning, execution, and verification. The same fan-out increases demand on shared inference capacity, creating bottlenecks in quota-limited settings. AgentQuotaBench studies this trade-off through a benchmark protocol designed to compare workflow architectures under a common, shared inference quota and to evaluate how quota-aware control changes performance, latency, and fairness.
 
 ### Research question
 
-> When many user workflows share a finite inference quota, which workflow architecture delivers the most correct, on-time completions per unit of shared capacity, and can quota-aware admission improve that service-level outcome without materially reducing task quality?
+> When many user workflows share a finite inference quota, which workflow architecture delivers the most correct, on-time completions per unit of shared capacity, and can quota-aware admission improve service-level goodput without degrading task quality?
 
 ### Experimental conditions
 
@@ -75,7 +75,7 @@ Multi-agent large language model (LLM) workflows can improve task completion by 
 | **S1** | Single-agent | Baseline: one agent completes the task. |
 | **S2** | Independent best-of-three | Three independent attempts run on isolated task states; all attempts and aggregation are charged to the same total per-workflow ceiling. |
 | **M2** | Planner-executor-verifier | Unconstrained multi-agent baseline: a planner creates a bounded task graph, up to two workers execute independent leaves, and a verifier checks the final state. |
-| **M3** | Quota-aware M2 | Same topology as M2, with atomic reservation of request, token, and in-flight capacity before worker dispatch; may wait, reduce worker count, or fall back to sequential/single-agent execution. |
+| **M3** | Quota-aware M2 | Same topology as M2, with atomic reservation of request, token, and in-flight capacity before worker dispatch; may wait, reduce worker count, or fall back to sequential execution when the shared quota is insufficient. |
 
 ### Workloads and load conditions
 
@@ -92,11 +92,11 @@ The quota multipliers are emulator settings normalized to measured single-agent 
 
 ### Primary endpoint and evaluation metrics
 
-The single primary endpoint is **deadline-adjusted goodput**: grader-passing workflows completed before their frozen deadlines per minute of a fixed open-loop measurement window. Workflows submitted during the measurement window remain in the cohort denominator; eligible completions during the drain period count when they finish before their deadline.
+The single primary endpoint is **deadline-adjusted goodput**: grader-passing workflows completed before their frozen deadlines per minute of a fixed open-loop measurement window. Workflows submitted after the deadline or failing validation do not count as successful goodput.
 
-Prespecified guardrails are **task success** and **p95 end-to-end latency**. Secondary measures include queue delay, rate-limit responses, retry amplification, token use, cost per successful task, coordination overhead, budget violations, admission diagnostics, and tenant fairness.
+Prespecified guardrails are **task success** and **p95 end-to-end latency**. Secondary measures include queue delay, rate-limit responses, retry amplification, token use, cost per successful task, coordination overhead, and tenant fairness outcomes.
 
-For the separate mixed-tenant fairness track, the protocol specifies Jain's fairness index alongside absolute goodput, per-tenant service rates, worst-tenant outcomes, and starvation events. Fairness is not interpreted without the underlying service levels.
+For the separate mixed-tenant fairness track, the protocol specifies Jain's fairness index alongside absolute goodput, per-tenant service rates, worst-tenant outcomes, and starvation events.
 
 ### Proposed experimental scale
 
@@ -114,17 +114,17 @@ The mixed-tenant fairness track is additional and is counted separately from the
 
 ## Research Principles
 
-**Controlled comparison.** The four architectures are evaluated with matched task instructions, a pinned model/provider configuration, equivalent tools and state snapshots, explicit workflow budgets, and accounting for every attempted request, retry, agent, and verifier call.
+**Controlled comparison.** The four architectures are evaluated with matched task instructions, a pinned model/provider configuration, equivalent tools and state snapshots, explicit workflow budgets, and a shared quota ledger.
 
-**Service-level evaluation.** The protocol evaluates complete logical workflows rather than relying only on isolated request counts, token totals, or average latency. Goodput, deadline attainment, tail latency, and tenant outcomes are reported together.
+**Service-level evaluation.** The protocol evaluates complete logical workflows rather than relying only on isolated request counts, token totals, or average latency. Goodput, deadline attainment, and fairness are treated as first-class outcome measures.
 
-**Transparent intervention.** M3 changes worker admission rather than the underlying model or communication representation. It reserves estimated shared capacity before dispatch and records reservation error, queueing, fallback, and reconciliation behavior.
+**Transparent intervention.** M3 changes worker admission rather than the underlying model or communication representation. It reserves estimated shared capacity before dispatch and records reservation, fallback, and overrun decisions.
 
-**Reproducibility.** The proposed release package includes versioned task manifests, model and quota configurations, arrival and fault schedules, prompts, event schemas, run seeds, sanitized traces, analysis scripts, and run outputs, subject to applicable licenses and provider terms.
+**Reproducibility.** The proposed release package includes versioned task manifests, model and quota configurations, arrival and fault schedules, prompts, event schemas, run seeds, sanitized traces, and analysis scripts.
 
 ## Protocol Status
 
-This work is a **research protocol and benchmark design**, not a completed empirical evaluation. The manuscript specifies the research questions, confirmatory conditions, workload plan, quota model, intervention, endpoints, statistical analysis, and reproducibility requirements.
+This work is a **research protocol and benchmark design**, not a completed empirical evaluation. The manuscript specifies the research questions, confirmatory conditions, workload plan, quota model, and statistical analysis plan, but the full benchmark harness and data collection remain pending.
 
 | Component | Status in protocol v1.1 |
 | --- | --- |
@@ -142,9 +142,9 @@ This work is a **research protocol and benchmark design**, not a completed empir
 | Empirical findings and benchmark result tables | Not available |
 | Full public code and run-artifact release | Pending |
 
-The nine reported tests cover selected reference-model mechanics only, including token-bucket refill, atomic reservation, concurrency limits, usage reconciliation, lease expiry, retry admission, deterministic fault replay, and fairness edge cases. They do not validate a production distributed quota governor, provider-specific behavior, live LLM calls, task grading, end-to-end workflow correctness, benchmark throughput, or any research hypothesis.
+The nine reported tests cover selected reference-model mechanics only, including token-bucket refill, atomic reservation, concurrency limits, usage reconciliation, lease expiry, retry admission, and deterministic quota accounting. They do not establish benchmark performance or any final empirical claim.
 
-No task-success rates, latency quantiles, goodput values, provider rate-limit rates, confidence intervals, p-values, or cost-per-success findings are claimed. Any future empirical claims must be populated from versioned, auditable experiment outputs.
+No task-success rates, latency quantiles, goodput values, provider rate-limit rates, confidence intervals, p-values, or cost-per-success findings are claimed. Any future empirical claims must be supported by separate benchmark execution and publication.
 
 ## Publication Details
 
@@ -157,16 +157,17 @@ No task-success rates, latency quantiles, goodput values, provider rate-limit ra
 | **Protocol version** | 1.1 |
 | **Archive publication date** | November 16, 2026 |
 | **Manuscript date shown in PDF** | November 15, 2026 |
-| **Archive** | Zenodo Preprint |
-| **Canonical DOI** | To be added when the exact DOI is available |
-
-The manuscript identifies public preregistration, the full benchmark harness, pilot execution, confirmatory experiments, and artifact release as pending. The work should therefore be cited and described as a protocol rather than as a completed empirical benchmark.
+| **Archive / Publisher** | Zenodo |
+| **Canonical DOI link** | https://doi.org |
+| **DOI** | 10.5281/zenodo.24279037 |
+| **Zenodo record URL** | https://zenodo.org |
+| **Asset status** | PDF-only protocol on Zenodo; no duplicate PDF upload to GitHub |
 
 ## Citation
 
 Suggested citation:
 
-Ashraf, M. A. (2026). *AgentQuotaBench: Evaluating Multi-Agent LLM Workflows Under Shared Inference Quotas*. Research Protocol, Version 1.1. Zenodo Preprint.
+Ashraf, M. A. (2026). *AgentQuotaBench: Evaluating Multi-Agent LLM Workflows Under Shared Inference Quotas*. Research Protocol, Version 1.1. Zenodo.
 
 ### BibTeX
 
@@ -176,14 +177,15 @@ Ashraf, M. A. (2026). *AgentQuotaBench: Evaluating Multi-Agent LLM Workflows Und
   title        = {{AgentQuotaBench: Evaluating Multi-Agent LLM Workflows Under Shared Inference Quotas}},
   year         = {2026},
   month        = nov,
-  howpublished = {Zenodo Preprint},
-  note         = {Research Protocol, Version 1.1. Manuscript dated
-                  November 15, 2026; archive publication date
-                  November 16, 2026. Confirmatory experiments pending}
+  doi          = {10.5281/zenodo.24279037},
+  url          = {https://zenodo.org},
+  howpublished = {Zenodo},
+  note         = {Research Protocol, Version 1.1. Published November 16, 2026. Confirmatory experiments pending.}
 }
 ```
 
-The DOI and record URL are intentionally omitted until the canonical Zenodo record details are available. Add the exact DOI to the BibTeX entry and link the record here once verified; do not substitute the generic Zenodo homepage or DOI resolver homepage.
+DOI: [10.5281/zenodo.24279037](https://doi.org/10.5281/zenodo.24279037)  
+Zenodo record: [https://zenodo.org](https://zenodo.org)
 
 ## Author
 

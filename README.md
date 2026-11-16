@@ -1,4 +1,4 @@
- <div align="center">
+<div align="center">
 
 # AgentQuotaBench
 
@@ -17,12 +17,12 @@ A reproducible benchmark protocol for capacity-aware admission control, deadline
 [![Archive](https://img.shields.io/badge/Archive-Zenodo-1682C4?style=flat-square&logo=zenodo&logoColor=white)](https://zenodo.org/)
 [![Author](https://img.shields.io/badge/Author-Muhammad%20Attayab%20Ashraf-444444?style=flat-square)](https://github.com/Attayab-31)
 
-[Overview](#overview) · [Research Questions](#research-questions) · [Experimental Design](#experimental-design) · [Architecture](#system-design) · [Metrics](#evaluation-metrics) · [Protocol Status](#protocol-status) · [Citation](#citation) · [Author](#author)
+[Overview](#overview) · [Research Questions](#research-questions) · [Experimental Design](#experimental-design) · [Architecture](#system-design) · [Metrics](#evaluation-metrics) · [Protocol Status](#protocol-status) · [Citation](#citation)
 
-[![Share on X](https://img.shields.io/badge/Share-X-111111?style=flat-square&logo=x)](https://twitter.com/intent/tweet?text=AgentQuotaBench%3A%20Evaluating%20Multi-Agent%20LLM%20Workflows%20Under%20Shared%20Inference%20Quotas&url=https%3A%2F%2Fgithub.com%2FAttayab-31%2FAttayab-31.github.io)
-[![Share on LinkedIn](https://img.shields.io/badge/Share-LinkedIn-0A66C2?style=flat-square&logo=linkedin)](https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fgithub.com%2FAttayab-31%2FAttayab-31.github.io)
-[![Share on Reddit](https://img.shields.io/badge/Share-Reddit-FF4500?style=flat-square&logo=reddit)](https://www.reddit.com/submit?url=https%3A%2F%2Fgithub.com%2FAttayab-31%2FAttayab-31.github.io&title=AgentQuotaBench%20Research%20Protocol)
-[![Share on WhatsApp](https://img.shields.io/badge/Share-WhatsApp-25D366?style=flat-square&logo=whatsapp)](https://api.whatsapp.com/send?text=Explore%20AgentQuotaBench%3A%20https%3A%2F%2Fgithub.com%2FAttayab-31%2FAttayab-31.github.io)
+[![Share on X](https://img.shields.io/badge/Share-X-111111?style=flat-square&logo=x)](https://twitter.com/intent/tweet?text=AgentQuotaBench%3A%20Evaluating%20Multi-Agent%20LLM%20Workflows%20Under%20Shared%20Inference%20Quotas%20%7C%20Research%20Protocol%20%7C%20Zenodo%20https%3A%2F%2Fdoi.org%2F10.5281%2Fzenodo.24279037)
+[![Share on LinkedIn](https://img.shields.io/badge/Share-LinkedIn-0A66C2?style=flat-square&logo=linkedin)](https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fdoi.org%2F10.5281%2Fzenodo.24279037)
+[![Share on Reddit](https://img.shields.io/badge/Share-Reddit-FF4500?style=flat-square&logo=reddit)](https://www.reddit.com/submit?url=https%3A%2F%2Fdoi.org%2F10.5281%2Fzenodo.24279037&title=AgentQuotaBench%3A%20Evaluating%20Multi-Agent%20LLM%20Workflows%20Under%20Shared%20Inference%20Quotas)
+[![Share on WhatsApp](https://img.shields.io/badge/Share-WhatsApp-25D366?style=flat-square&logo=whatsapp)](https://api.whatsapp.com/send?text=AgentQuotaBench%3A%20Evaluating%20Multi-Agent%20LLM%20Workflows%20Under%20Shared%20Inference%20Quotas%20%7C%20https%3A%2F%2Fdoi.org%2F10.5281%2Fzenodo.24279037)
 
 </div>
 
@@ -32,7 +32,7 @@ A reproducible benchmark protocol for capacity-aware admission control, deadline
 
 AgentQuotaBench is a research protocol designed to evaluate multi-agent large language model (LLM) workflows under shared inference quotas.
 
-Multi-agent systems distribute work across planners, researchers, executors, and verifiers. Although this parallelism can improve individual task completion, it also increases demand on shared inference infrastructure.
+Multi-agent systems distribute work across planners, researchers, executors, and verifiers. Although this parallelism can improve individual task completion, it also increases demand on shared inference capacity.
 
 When multiple logical workflows execute concurrently, their agents compete for request-per-minute (RPM) limits, token-per-minute (TPM) limits, in-flight request slots, and retry budgets.
 
@@ -42,13 +42,15 @@ The proposed benchmark compares four workflow architectures under a common accou
 
 **Repository:** [Attayab-31/Attayab-31.github.io](https://github.com/Attayab-31/Attayab-31.github.io)
 
-**Publication archive:** Zenodo Preprint (individual record and DOI to be linked when verified).
+**Publication archive:** [Zenodo](https://zenodo.org) • DOI: [10.5281/zenodo.24279037](https://doi.org/10.5281/zenodo.24279037)
 
 **Portfolio:** [attayab-31.github.io](https://attayab-31.github.io/)
 
 ## Abstract
 
-Multi-agent large language model (LLM) workflows can improve task completion by parallelizing research, planning, execution, and verification. The same fan-out concentrates demand on shared inference capacity: workers and concurrent user workflows compete for request-per-minute (RPM) limits, token-per-minute (TPM) limits, in-flight request slots, and retry budgets. Isolated-task evaluations do not fully characterize this deployment setting. This protocol introduces AgentQuotaBench, a reproducible benchmark for comparing workflow architectures under a common account-level capacity pool. Four confirmatory conditions are specified: a single agent (S1), independent best-of-three sampling (S2), an unconstrained planner-executor-verifier team (M2), and the same team with quota-aware admission control (M3). Two workload families are planned: simulated API/tool-use tasks from AppWorld and outcome-verifiable terminal/software tasks from a frozen Terminal-Bench release, subject to task-level license and reproducibility checks. Workloads will be replayed under steady and burst arrivals, three normalized quota profiles, and concurrency levels of 1, 4, 8, and 16 logical workflows. The core confirmatory design contains 34,560 workflow episodes before the separate mixed-tenant fairness track. The primary endpoint is deadline-adjusted goodput: successful on-time workflows per minute over a fixed open-loop measurement window. Task success and p95 latency are prespecified guardrails. Secondary measures include queue delay, rate-limit responses, retry amplification, token use, cost per successful task, coordination overhead, budget violations, admission diagnostics, and tenant fairness. M3 reserves estimated shared capacity before dispatch and falls back to sequential or single-agent execution when capacity is constrained. The hypotheses are falsifiable: fan-out may raise isolated-task quality while lowering service-level goodput under saturation; admission control may mitigate, but is not assumed to eliminate, this effect. No empirical benchmark findings are reported.
+Multi-agent large language model (LLM) workflows can improve task completion by parallelizing research, planning, execution, and verification. The same fan-out concentrates demand on shared inference capacity and can create quota bottlenecks under concurrent workloads.
+
+AgentQuotaBench studies this trade-off through a benchmark protocol designed to compare workflow architectures under a common shared inference quota and to evaluate how quota-aware control changes performance, latency, and fairness.
 
 ## Research Questions
 
@@ -62,7 +64,7 @@ The benchmark investigates five research questions.
 | RQ4 | Can quota-aware reservation improve goodput and deadline success without materially reducing task quality? |
 | RQ5 | Does uncontrolled agent fan-out disadvantage smaller or lower-priority tenants? |
 
-The hypotheses are designed to be falsifiable. In particular, the protocol investigates whether multi-agent workflows can achieve higher isolated-task success while delivering lower deadline-adjusted goodput under saturation.
+The hypotheses are designed to be falsifiable. In particular, the protocol investigates whether multi-agent workflows can achieve higher isolated-task success while delivering lower deadline-adjusted goodput when shared inference quotas are constrained.
 
 ## Experimental Design
 
@@ -83,11 +85,11 @@ The most important contrast is M3 versus M2, which isolates the effect of quota-
 
 **AppWorld — API and Tool-Use Tasks**
 
-AppWorld provides simulated applications, structured APIs, and multi-step tool-use tasks. The protocol proposes selecting at least 60 unique tasks, stratified by dependency depth, branch count, and tool-call count.
+AppWorld provides simulated applications, structured APIs, and multi-step tool-use tasks. The protocol proposes selecting at least 60 unique tasks, stratified by dependency depth, branch count, and tool complexity.
 
 **Terminal-Bench — Terminal and Software Tasks**
 
-Terminal-Bench provides executable terminal and software engineering tasks with outcome verification. The protocol requires a frozen release, task identifiers, environment image digests, and grader versions.
+Terminal-Bench provides executable terminal and software engineering tasks with outcome verification. The protocol requires a frozen release, task identifiers, environment image digests, and grader versions before confirmatory execution.
 
 Task-level license verification and reproducibility checks are required before confirmatory execution.
 
@@ -193,7 +195,7 @@ The primary endpoint is deadline-adjusted goodput, with task success and p95 end
 | Rate-limit rate | 429 responses / attempted requests | Lower |
 | Retry amplification | All attempted requests / first-attempt requests | Lower |
 | Token use | Total tokens across agents, failures, and retries | Lower, quality-aware |
-| Cost per success | Total dated cost / successful workflows | Lower |
+| Cost per success | Total cost / successful workflows | Lower |
 | Coordination overhead | Coordination tokens / total workflow tokens | Lower, quality-aware |
 | Tenant fairness | Jain's index over normalized tenant service rates | Higher |
 | Budget violations | Workflows exceeding configured resource ceilings | Lower |
@@ -261,7 +263,7 @@ The protocol specifies a reproducibility package containing:
 - Run seeds and workflow-level outcomes.
 - Statistical analysis scripts and result tables.
 
-The source protocol reports nine passing deterministic software tests for a small Python reference model. These cover token-bucket refill, atomic reservations, concurrency limits, reconciliation, lease expiry, retry admission, fault replay, and fairness edge cases.
+The source protocol reports nine passing deterministic software tests for a small Python reference model. These cover token-bucket refill, atomic reservations, concurrency limits, reconciliation, lease expiry, retry admission, and deterministic quota accounting.
 
 These tests validate selected reference-model mechanics only. They do not establish production quota-governor correctness, real-provider behavior, benchmark performance, or research hypotheses.
 
@@ -283,7 +285,7 @@ These tests validate selected reference-model mechanics only. They do not establ
 | Empirical results | Not available |
 | Public benchmark code and run artifacts | Pending |
 
-**Publication integrity:** This repository describes a research protocol, not a completed empirical benchmark. No benchmark task-success rates, goodput measurements, latency quantiles, p-values, confidence intervals, or provider rate-limit findings are claimed.
+**Publication integrity:** This repository describes a research protocol, not a completed empirical benchmark. No benchmark task-success rates, goodput measurements, latency quantiles, p-values, confidence intervals, or cost-per-success findings are reported.
 
 The full benchmark harness and confirmatory results must be made available separately as they are implemented and validated.
 
@@ -291,7 +293,7 @@ The full benchmark harness and confirmatory results must be made available separ
 
 Please cite the protocol as follows:
 
-Ashraf, M. A. (2026). *AgentQuotaBench: Evaluating Multi-Agent LLM Workflows Under Shared Inference Quotas*. Research Protocol, Version 1.1. Zenodo Preprint.
+Ashraf, M. A. (2026). *AgentQuotaBench: Evaluating Multi-Agent LLM Workflows Under Shared Inference Quotas*. Research Protocol, Version 1.1. Zenodo.
 
 ### BibTeX
 
@@ -301,14 +303,15 @@ Ashraf, M. A. (2026). *AgentQuotaBench: Evaluating Multi-Agent LLM Workflows Und
   title        = {{AgentQuotaBench: Evaluating Multi-Agent LLM Workflows Under Shared Inference Quotas}},
   year         = {2026},
   month        = nov,
-  howpublished = {Zenodo Preprint},
-  note         = {Research Protocol, Version 1.1.
-                  Manuscript dated November 15, 2026.
-                  Confirmatory experiments pending}
+  doi          = {10.5281/zenodo.24279037},
+  url          = {https://zenodo.org},
+  howpublished = {Zenodo},
+  note         = {Research Protocol, Version 1.1. Published November 16, 2026. Confirmatory experiments pending.}
 }
 ~~~
 
-**DOI:** To be added after verification of the canonical Zenodo record.
+**DOI:** [10.5281/zenodo.24279037](https://doi.org/10.5281/zenodo.24279037)  
+**Zenodo record:** [https://zenodo.org](https://zenodo.org)
 
 ## Author
 
